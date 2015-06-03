@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.artitk.parcelerexample.data.Person;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText    etName;
@@ -85,7 +87,14 @@ public class MainActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvResult.setText("Save!!");
+                String fullname = etName.getText().toString();
+                int gender      = rdoMale.isChecked() ? 1 : 2;
+                int age         = sbAge.getProgress();
+
+                Person person = new Person(fullname, gender, age);
+
+                tvResult.setText(person.getFullname() + " is " + (person.getGender() == 1 ? "Male" : "Female") + ".\n");
+                tvResult.append((person.getGender() == 1 ? "He" : "She") + " was " + person.getAge() + " " + (person.getAge() > 1 ? "years" : "year") + " old.");
             }
         });
     }
