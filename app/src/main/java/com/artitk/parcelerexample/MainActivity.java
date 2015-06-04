@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         showOutput();
         tvResult.append("Data from Restore Instance State");
+        tvResult.setTextColor(getResources().getColor(R.color.blue_900));
     }
 
     @Override
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
                 showOutput();
                 tvResult.append("Data from click Save Button");
+                tvResult.setTextColor(getResources().getColor(R.color.green_900));
             }
         });
     }
