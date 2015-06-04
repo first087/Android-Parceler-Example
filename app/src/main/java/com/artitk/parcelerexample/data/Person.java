@@ -5,9 +5,9 @@ import org.parceler.Parcel;
 @Parcel
 public class Person {
 
-    private String fullname;
-    private int gender;
-    private int age;
+    String fullname;
+    int gender;
+    int age;
 
     public Person() { /* Required empty bean constructor */ }
 
