@@ -1,5 +1,6 @@
 package com.artitk.parcelerexample;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +14,11 @@ import android.widget.TextView;
 
 import com.artitk.parcelerexample.data.Person;
 
+import org.parceler.Parcels;
+
 public class MainActivity extends AppCompatActivity {
+
+    private final String PERSON_KEY = "person";
 
     private EditText    etName;
     private RadioButton rdoMale;
@@ -57,15 +62,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        // TODO : Restore object from bundle
+        person = Parcels.unwrap(savedInstanceState.getParcelable(PERSON_KEY));
+
+        if (person == null) return;
+
+        showOutput();
+        tvResult.append("Data from Restore Instance State");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        // TODO : Save object to bundle
+        outState.putParcelable(PERSON_KEY, Parcels.wrap(person));
 
         super.onSaveInstanceState(outState);
     }
