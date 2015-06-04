@@ -1,7 +1,8 @@
 package com.artitk.parcelerexample;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +13,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.artitk.parcelerexample.data.Person;
+import com.artitk.parcelerexample.utils.KeyboardManager;
+
+import org.parceler.Parcels;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final String PERSON_KEY = "person";
 
     private EditText    etName;
     private RadioButton rdoMale;
@@ -23,10 +29,14 @@ public class MainActivity extends AppCompatActivity {
     private Button      btnSave;
     private TextView    tvResult;
 
+    private Person      person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        KeyboardManager.on(this);
 
         setupView();
         setupViewEvent();
@@ -52,6 +62,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        person = Parcels.unwrap(savedInstanceState.getParcelable(PERSON_KEY));
+
+        if (person == null) return;
+
+        showOutput();
+        tvResult.append("Data from Restore Instance State");
+        tvResult.setTextColor(getResources().getColor(R.color.blue_900));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(PERSON_KEY, Parcels.wrap(person));
+
+        super.onSaveInstanceState(outState);
     }
 
     private void setupView() {
@@ -91,11 +121,17 @@ public class MainActivity extends AppCompatActivity {
                 int gender      = rdoMale.isChecked() ? 1 : 2;
                 int age         = sbAge.getProgress();
 
-                Person person = new Person(fullname, gender, age);
+                person = new Person(fullname, gender, age);
 
-                tvResult.setText(person.getFullname() + " is " + (person.getGender() == 1 ? "Male" : "Female") + ".\n");
-                tvResult.append((person.getGender() == 1 ? "He" : "She") + " was " + person.getAge() + " " + (person.getAge() > 1 ? "years" : "year") + " old.");
+                showOutput();
+                tvResult.append("Data from click Save Button");
+                tvResult.setTextColor(getResources().getColor(R.color.green_900));
             }
         });
+    }
+
+    private void showOutput() {
+        tvResult.setText(person.getFullname() + " is " + (person.getGender() == 1 ? "Male" : "Female") + ".\n");
+        tvResult.append((person.getGender() == 1 ? "He" : "She") + " was " + person.getAge() + " " + (person.getAge() > 1 ? "years" : "year") + " old.\n\n");
     }
 }
