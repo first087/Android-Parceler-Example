@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Button      btnSave;
     private TextView    tvResult;
 
+    private Person      person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // TODO : Restore object from bundle
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // TODO : Save object to bundle
+
+        super.onSaveInstanceState(outState);
     }
 
     private void setupView() {
@@ -91,11 +107,16 @@ public class MainActivity extends AppCompatActivity {
                 int gender      = rdoMale.isChecked() ? 1 : 2;
                 int age         = sbAge.getProgress();
 
-                Person person = new Person(fullname, gender, age);
+                person = new Person(fullname, gender, age);
 
-                tvResult.setText(person.getFullname() + " is " + (person.getGender() == 1 ? "Male" : "Female") + ".\n");
-                tvResult.append((person.getGender() == 1 ? "He" : "She") + " was " + person.getAge() + " " + (person.getAge() > 1 ? "years" : "year") + " old.");
+                showOutput();
+                tvResult.append("Data from click Save Button");
             }
         });
+    }
+
+    private void showOutput() {
+        tvResult.setText(person.getFullname() + " is " + (person.getGender() == 1 ? "Male" : "Female") + ".\n");
+        tvResult.append((person.getGender() == 1 ? "He" : "She") + " was " + person.getAge() + " " + (person.getAge() > 1 ? "years" : "year") + " old.\n\n");
     }
 }
