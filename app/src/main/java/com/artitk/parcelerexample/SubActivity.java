@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.artitk.parcelerexample.data.Person;
 
+import org.parceler.Parcels;
+
 public class SubActivity extends AppCompatActivity {
 
     private TextView tvResult;
@@ -20,11 +22,17 @@ public class SubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
-        // TODO : Recv data
+        Intent intent = getIntent();
+        person = Parcels.unwrap(intent.getParcelableExtra(MainActivity.PERSON_KEY));
+
+        if (person == null) return;
 
         tvResult = (TextView) findViewById(R.id.tvResult);
 
-        // TODO : Set data
+        tvResult.setText("Name\t= " + person.getFullname() + "\n");
+        tvResult.append( "Gender\t= " + (person.getGender() == 1 ? "Male" : "Female") + "\n");
+        tvResult.append( "Age\t= " + person.getAge() + "\n\n");
+        tvResult.append( "Data from MainActivity");
     }
 
     @Override
