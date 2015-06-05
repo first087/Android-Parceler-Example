@@ -1,6 +1,7 @@
 package com.artitk.parcelerexample;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_view_source) {
+            startActivity((new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.github_url)))));
             return true;
         }
 
