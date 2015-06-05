@@ -31,7 +31,7 @@ public class SubActivity extends AppCompatActivity {
         tvResult = (TextView) findViewById(R.id.tvResult);
 
         tvResult.setText("Name = " + person.getFullname() + "\n");
-        tvResult.append( "Gender = " + (person.getGender() == 1 ? "Male" : "Female") + "\n");
+        tvResult.append( "Gender = " + (person.getGender() == Person.Gender.MALE ? "Male" : "Female") + "\n");
         tvResult.append( "Age = " + person.getAge() + "\n\n");
         tvResult.append( "Data from MainActivity");
         tvResult.setTextColor(getResources().getColor(R.color.orange_900));

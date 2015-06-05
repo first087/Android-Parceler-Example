@@ -139,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fullname = etName.getText().toString();
-                int gender      = rdoMale.isChecked() ? 1 : 2;
-                int age         = sbAge.getProgress();
+                String fullname      = etName.getText().toString();
+                Person.Gender gender = rdoMale.isChecked() ? Person.Gender.MALE : Person.Gender.FEMALE;
+                int age              = sbAge.getProgress();
 
                 person = new Person(fullname, gender, age);
 
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showOutput() {
-        tvResult.setText(person.getFullname() + " is " + (person.getGender() == 1 ? "Male" : "Female") + ".\n");
-        tvResult.append((person.getGender() == 1 ? "He" : "She") + " was " + person.getAge() + " " + (person.getAge() > 1 ? "years" : "year") + " old.\n\n");
+        tvResult.setText(person.getFullname() + " is " + (person.getGender() == Person.Gender.MALE ? "Male" : "Female") + ".\n");
+        tvResult.append((person.getGender() == Person.Gender.MALE ? "He" : "She") + " was " + person.getAge() + " " + (person.getAge() > 1 ? "years" : "year") + " old.\n\n");
     }
 }

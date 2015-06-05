@@ -5,13 +5,18 @@ import org.parceler.Parcel;
 @Parcel
 public class Person {
 
+    public enum Gender {
+        MALE,
+        FEMALE
+    }
+
     String fullname;
-    int gender;
+    Gender gender;
     int age;
 
     public Person() { /* Required empty bean constructor */ }
 
-    public Person(String fullname, int gender, int age) {
+    public Person(String fullname, Gender gender, int age) {
         this.fullname = fullname;
         this.gender = gender;
         this.age = age;
@@ -21,7 +26,7 @@ public class Person {
         return fullname;
     }
 
-    public int getGender() {
+    public Gender getGender() {
         return gender;
     }
 
