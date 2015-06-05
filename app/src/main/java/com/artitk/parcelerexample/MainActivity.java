@@ -1,5 +1,6 @@
 package com.artitk.parcelerexample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,8 @@ import org.parceler.Parcels;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String PERSON_KEY = "person";
+    private final String PERSON_KEY             = "person";
+    private final int    REQ_CODE_SUB_ACTIVITY  = 12345;
 
     private EditText    etName;
     private RadioButton rdoMale;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView    tvAge;
     private Button      btnSave;
     private TextView    tvResult;
+    private Button      btnSend;
 
     private Person      person;
 
@@ -84,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode != REQ_CODE_SUB_ACTIVITY) return;
+
+        // TODO : Show result
+    }
+
     private void setupView() {
         etName      = (EditText)    findViewById(R.id.etName);
         rdoMale     = (RadioButton) findViewById(R.id.rdoMale);
@@ -92,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         tvAge       = (TextView)    findViewById(R.id.tvAge);
         btnSave     = (Button)      findViewById(R.id.btnSave);
         tvResult    = (TextView)    findViewById(R.id.tvResult);
+        btnSend     = (Button)      findViewById(R.id.btnSend);
     }
 
     private void setupViewEvent() {
@@ -126,6 +139,17 @@ public class MainActivity extends AppCompatActivity {
                 showOutput();
                 tvResult.append("Data from click Save Button");
                 tvResult.setTextColor(getResources().getColor(R.color.green_900));
+            }
+        });
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SubActivity.class);
+
+                // TODO : Send data
+
+                startActivityForResult(intent, REQ_CODE_SUB_ACTIVITY);
             }
         });
     }

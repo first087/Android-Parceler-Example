@@ -1,5 +1,6 @@
 package com.artitk.parcelerexample;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,7 +20,11 @@ public class SubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
+        // TODO : Recv data
+
         tvResult = (TextView) findViewById(R.id.tvResult);
+
+        // TODO : Set data
     }
 
     @Override
@@ -42,5 +47,17 @@ public class SubActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        int resultCode = RESULT_OK;
+        Intent intent = new Intent();
+
+        // TODO : Return data
+
+        setResult(resultCode, intent);
+
+        super.onBackPressed();
     }
 }

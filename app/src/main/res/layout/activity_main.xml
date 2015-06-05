@@ -126,4 +126,12 @@
         android:freezesText="true"
         android:text="@string/result" />
 
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvResult"
+        android:layout_centerHorizontal="true"
+        android:text="@string/send" />
+
 </RelativeLayout>
