@@ -88,12 +88,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
 
         if (requestCode != REQ_CODE_SUB_ACTIVITY) return;
+        if (resultCode != RESULT_OK) return;
 
-        // TODO : Show result
+        person = Parcels.unwrap(intent.getParcelableExtra(PERSON_KEY));
+
+        if (person == null) return;
+
+        showOutput();
+        tvResult.append("Data from SubActivity");
+        tvResult.setTextColor(getResources().getColor(R.color.orange_900));
     }
 
     private void setupView() {

@@ -29,10 +29,11 @@ public class SubActivity extends AppCompatActivity {
 
         tvResult = (TextView) findViewById(R.id.tvResult);
 
-        tvResult.setText("Name\t= " + person.getFullname() + "\n");
-        tvResult.append( "Gender\t= " + (person.getGender() == 1 ? "Male" : "Female") + "\n");
-        tvResult.append( "Age\t= " + person.getAge() + "\n\n");
+        tvResult.setText("Name = " + person.getFullname() + "\n");
+        tvResult.append( "Gender = " + (person.getGender() == 1 ? "Male" : "Female") + "\n");
+        tvResult.append( "Age = " + person.getAge() + "\n\n");
         tvResult.append( "Data from MainActivity");
+        tvResult.setTextColor(getResources().getColor(R.color.orange_900));
     }
 
     @Override
@@ -62,7 +63,7 @@ public class SubActivity extends AppCompatActivity {
         int resultCode = RESULT_OK;
         Intent intent = new Intent();
 
-        // TODO : Return data
+        intent.putExtra(MainActivity.PERSON_KEY, Parcels.wrap(person));
 
         setResult(resultCode, intent);
 
