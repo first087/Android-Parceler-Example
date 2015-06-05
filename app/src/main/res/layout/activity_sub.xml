@@ -15,7 +15,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/result"
-        tools:ignore="RtlHardcoded"
-        android:textColor="@color/orange_900" />
+        tools:ignore="RtlHardcoded" />
 
 </RelativeLayout>

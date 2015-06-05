@@ -20,8 +20,8 @@ import org.parceler.Parcels;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String PERSON_KEY             = "person";
-    private final int    REQ_CODE_SUB_ACTIVITY  = 12345;
+    public static final String PERSON_KEY       = "person";
+    private final int   REQ_CODE_SUB_ACTIVITY   = 12345;
 
     private EditText    etName;
     private RadioButton rdoMale;
@@ -88,12 +88,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
 
         if (requestCode != REQ_CODE_SUB_ACTIVITY) return;
+        if (resultCode != RESULT_OK) return;
 
-        // TODO : Show result
+        person = Parcels.unwrap(intent.getParcelableExtra(PERSON_KEY));
+
+        if (person == null) return;
+
+        showOutput();
+        tvResult.append("Data from SubActivity");
+        tvResult.setTextColor(getResources().getColor(R.color.orange_900));
     }
 
     private void setupView() {
@@ -147,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SubActivity.class);
 
-                // TODO : Send data
+                intent.putExtra(PERSON_KEY, Parcels.wrap(person));
 
                 startActivityForResult(intent, REQ_CODE_SUB_ACTIVITY);
             }
